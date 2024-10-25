@@ -63,8 +63,8 @@ public class SnakeAndLadders {
         for (int row = 0; row < BOARD_SIZE; row++) {
             for (int col = 0; col < BOARD_SIZE; col++) {
                 Rectangle tile = new Rectangle(TILE_SIZE, TILE_SIZE);
-                tile.setFill(Color.LIGHTGRAY);
-                tile.setStroke(Color.BLACK);
+                tile.setFill(Color.DARKGREEN);
+                tile.setStroke(Color.ORANGERED);
 
                 // Add tile numbers
                 Text numberText = new Text(String.valueOf(number));
