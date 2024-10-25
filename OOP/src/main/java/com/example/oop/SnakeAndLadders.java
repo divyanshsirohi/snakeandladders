@@ -108,6 +108,8 @@ public class SnakeAndLadders {
     }
 
     private void movePlayer1(int diceRoll) {
+
+        int prev = player1Position;
         player1Position += diceRoll;
 
         // Check if Player 1 wins
@@ -118,17 +120,24 @@ public class SnakeAndLadders {
 
         // Check for snakes or ladders
         if (snakesAndLadders.containsKey(player1Position)) {
-            player1Position = snakesAndLadders.get(player1Position);
-            message.setText("Player 1 hit a " + (player1Position > 100 ? "ladder!" : "snake!"));
+            int newPos = snakesAndLadders.get(player1Position);
+            if (newPos < player1Position) {
+                message.setText("Player 1 hit a snake!");
+            } else {
+                message.setText("Player 1 hit a ladder!");
+            }
+            player1Position = newPos;
         }
 
         updatePlayerPosition(player1Token, player1Position);
     }
 
     private void movePlayer2(int diceRoll) {
+
+        int prev = player1Position;
         player2Position += diceRoll;
 
-        // Check if Player 2 wins
+        // Check if Player 1 wins
         if (player2Position >= 100) {
             player2Position = 100;
             message.setText("Player 2 wins!");
@@ -136,12 +145,18 @@ public class SnakeAndLadders {
 
         // Check for snakes or ladders
         if (snakesAndLadders.containsKey(player2Position)) {
-            player2Position = snakesAndLadders.get(player2Position);
-            message.setText("Player 2 hit a " + (player2Position > 100 ? "ladder!" : "snake!"));
+            int newPos = snakesAndLadders.get(player2Position);
+            if (newPos < player2Position) {
+                message.setText("Player 2 hit a snake!");
+            } else {
+                message.setText("Player 2 hit a ladder!");
+            }
+            player2Position = newPos;
         }
 
         updatePlayerPosition(player2Token, player2Position);
     }
+
 
     private void updatePlayerPosition(Circle playerToken, int playerPosition) {
         int row = (playerPosition - 1) / BOARD_SIZE;
